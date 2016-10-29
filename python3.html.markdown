@@ -38,7 +38,7 @@ Note: This article applies to Python 3 specifically. Check out [here](http://lea
 8 - 1   # => 7
 10 * 2  # => 20
 
-# Except division which returns floats, real numbers, by default
+# Except division which defaults to rounding down
 35 / 5  # => 7.0
 
 # Result of integer division truncated down both for positive and negative.
@@ -47,8 +47,12 @@ Note: This article applies to Python 3 specifically. Check out [here](http://lea
 -5 // 3      # => -2
 -5.0 // 3.0  # => -2.0
 
-# When you use a float, results are floats
-3 * 2.0  # => 6.0
+# When one of the inputs is a float, result is a float
+10.0 / 3  # => 3.3333333333333335
+
+# to force this behavior on integers, use 
+from __future__ import division
+10 / 3 # => 3.3333333333333335
 
 # Modulo operation
 7 % 3  # => 1
@@ -602,7 +606,7 @@ list(filter(lambda x: x > 5, [3, 4, 5, 6, 7]))  # => [6, 7]
 [x for x in [3, 4, 5, 6, 7] if x > 5]  # => [6, 7]
 
 # You can construct set and dict comprehensions as well.
-{x for x in 'abcddeef' if x in 'abc'}  # => {'d', 'e', 'f'}
+{x for x in 'abcddeef' if x not in 'abc'}  # => {'d', 'e', 'f'}
 {x: x**2 for x in range(5)}  # => {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
 
 
@@ -761,8 +765,13 @@ if __name__ == '__main__':
     print(b.say('hello'))
     print(b.fly)
 
+# To take advantage of modularization by file you could place the classes above in their own files,
+# say, human.py and bat.py
 
+# to import functions from other files use the following format
 # from "filename-without-extension" import "function-or-class"
+
+# superhero.py
 from human import Human
 from bat import Bat
 
@@ -896,7 +905,5 @@ print(say(say_please=True))  # Can you buy me a beer? Please! I am poor :(
 * [30 Python Language Features and Tricks You May Not Know About](http://sahandsaba.com/thirty-python-language-features-and-tricks-you-may-not-know.html)
 * [Official Style Guide for Python](https://www.python.org/dev/peps/pep-0008/)
 * [Python 3 Computer Science Circles](http://cscircles.cemc.uwaterloo.ca/)
-
-### Dead Tree
-
-* [Programming Python](http://www.amazon.com/gp/product/0596158106/ref=as_li_qf_sp_asin_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0596158106&linkCode=as2&tag=homebits04-20)
+* [Dive Into Python 3](http://www.diveintopython3.net/index.html)
+* [A Crash Course in Python for Scientists](http://nbviewer.jupyter.org/gist/anonymous/5924718)
